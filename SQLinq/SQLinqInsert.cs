@@ -5,6 +5,7 @@
 using SQLinq.Compiler;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace SQLinq
 {
@@ -43,7 +44,7 @@ namespace SQLinq
             // Get Table / View Name
             var tableName = this.GetTableName();
 
-            foreach (var p in type.GetProperties())
+            foreach (var p in type.GetTypeInfo().DeclaredProperties)
             {
                 var includeInInsert = true;
                 var fieldName = p.Name;
@@ -88,7 +89,7 @@ namespace SQLinq
                 // Get Table / View Name
                 var type = this.Data.GetType();
                 tableName = type.Name;
-                var tableAttribute = type.GetCustomAttributes(typeof(SQLinqTableAttribute), false).FirstOrDefault() as SQLinqTableAttribute;
+                var tableAttribute = type.GetTypeInfo().GetCustomAttributes(typeof(SQLinqTableAttribute), false).FirstOrDefault() as SQLinqTableAttribute;
                 if (tableAttribute != null)
                 {
                     // Table / View name is explicitly set, use that instead

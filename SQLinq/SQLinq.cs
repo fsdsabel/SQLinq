@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace SQLinq
 {
@@ -382,7 +383,7 @@ namespace SQLinq
                 // Get Table / View Name
                 var type = typeof(T);
                 tableName = type.Name;
-                var tableAttribute = type.GetCustomAttributes(typeof(SQLinqTableAttribute), false).FirstOrDefault() as SQLinqTableAttribute;
+                var tableAttribute = type.GetTypeInfo().GetCustomAttributes(typeof(SQLinqTableAttribute), false).FirstOrDefault() as SQLinqTableAttribute;
                 if (tableAttribute != null)
                 {
                     // Table / View name is explicitly set, use that instead
@@ -447,7 +448,7 @@ namespace SQLinq
 
             // Get Table / View Name
             var tableName = this.GetTableName(true);
-            var subqueryAttr = type.GetCustomAttributes(typeof(SQLinqSubQueryAttribute), false).FirstOrDefault() as SQLinqSubQueryAttribute;
+            var subqueryAttr = type.GetTypeInfo().GetCustomAttributes(typeof(SQLinqSubQueryAttribute), false).FirstOrDefault() as SQLinqSubQueryAttribute;
             if (subqueryAttr != null)
             {
                 var tableQuery = subqueryAttr.GetQuery(parameters);
@@ -511,8 +512,8 @@ namespace SQLinq
             }
             if (selectResult.Select.Count == 0)
             {
-                var props = typeof(T).GetProperties();
-                var usesSQLinqColumn = props.Where(d => d.GetCustomAttributes(typeof(SQLinqColumnAttribute), false).Length > 0).Count() > 0;
+                var props = typeof(T).GetRuntimeProperties();
+                var usesSQLinqColumn = props.Any(d => d.GetCustomAttributes(typeof(SQLinqColumnAttribute), false).Any());
                 if (usesSQLinqColumn)
                 {
                     foreach (var p in props)

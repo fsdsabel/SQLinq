@@ -6,32 +6,28 @@
     <Version>3.1.1</Version>
     <Copyright>Copyright © Chris Pietschmann 2015</Copyright>
     <Authors>Chris Pietschmann</Authors>
-    <Product>SQLinq.Dapper</Product>
-    <AssemblyName>SQLinq.Dapper</AssemblyName>
-    <RootNamespace>SQLinq.Dapper</RootNamespace>
+    <Product>SQLinq</Product>
+    <AssemblyName>SQLinq</AssemblyName>
+    <RootNamespace>SQLinq</RootNamespace>
     <AssemblyVersion>3.1.1.0</AssemblyVersion>
     <FileVersion>3.1.1.0</FileVersion>
     <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\SQLinq\SQLinqKey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>SQLinqKey.snk</AssemblyOriginatorKeyFile>
     <DelaySign>False</DelaySign>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard1.3\.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\netstandard1.3\SQLinq.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="Properties\" />
-    <Folder Include="Properties\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper.StrongName" Version="1.50.2" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
+    <PackageReference Include="System.Reflection" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\SQLinq\SQLinq.Standard.csproj" />
-  </ItemGroup>
-
 
 </Project>

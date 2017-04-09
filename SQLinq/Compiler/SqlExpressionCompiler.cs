@@ -645,14 +645,14 @@ namespace SQLinq.Compiler
                     var t = (Type)ce.Type;
                     var fieldName = de.Member.Name;
 
-                    var fieldInfo = t.GetField(fieldName) ?? t.GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic);
+                    var fieldInfo = TypeExtensions.GetField(t, fieldName) ?? TypeExtensions.GetField(t, fieldName, BindingFlags.Instance | BindingFlags.NonPublic);
                     if (fieldInfo != null)
                     {
                         val = fieldInfo.GetValue(val);
                     }
                     else
                     {
-                        PropertyInfo propInfo = t.GetProperty(fieldName) ?? t.GetProperty(fieldName, BindingFlags.Instance | BindingFlags.NonPublic);
+                        PropertyInfo propInfo = TypeExtensions.GetProperty(t, fieldName) ?? TypeExtensions.GetProperty(t, fieldName, BindingFlags.Instance | BindingFlags.NonPublic);
                         if (propInfo != null)
                         {
                             val = propInfo.GetValue(val, null);

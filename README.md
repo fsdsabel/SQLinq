@@ -3,7 +3,13 @@ SQLinq allows you to use LINQ (Language INtegrated Query) features of .NET to ge
 
 This allows for easy generation of ad-hoc SQL code using strongly typed LINQ code in .NET in a similar fashion to writing queries with Entity Framework. However, SQLinq is NOT an ORM. SQLinq is a library for generating ad-hoc, strongly typed SQL code at runtime. The generated SQL code can then be executed against a SQL database using either ADO.NET directly, or with Dapper.NET using the SQLinq Dapper nuget package. One of the benefits of SQLinq is that you can write ad-hoc SQL code at runtime that isn't just strongly typed, but benefits from compile time validation as well.
 
+## Fork
+
+This fork ported SQLinq to .NET Standard 1.3.
+
 ## Nuget Package
+
+**Attention!** This repository has no official Nuget Package so you need to build this yourself! This needs Visual Studio 2017.
 
 [![Install SQLinq via Nuget](http://sqlinq.codeplex.com/Download?ProjectName=sqlinq&DownloadId=357830 "Install SQLinq via Nuget")](http://nuget.org/packages/sqlinq)  
 [http://nuget.org/packages/sqlinq](http://nuget.org/packages/sqlinq)

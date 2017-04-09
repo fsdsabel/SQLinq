@@ -4,6 +4,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace SQLinq
 {
@@ -35,8 +37,7 @@ namespace SQLinq
             }
 
             // Invoke static method that returns the sub-query to use
-            var methods = this.Type.GetMethods();
-            var method = this.Type.GetMethod(this.Method);
+            var method = this.Type.GetTypeInfo().DeclaredMethods.First(m=>m.Name == Method);
             var query = (ISQLinq)method.Invoke(null, null);
 
             var result = query.ToSQL();
