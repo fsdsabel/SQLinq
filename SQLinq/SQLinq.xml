@@ -1,0 +1,697 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SQLinq</name>
+    </assembly>
+    <members>
+        <member name="M:SQLinq.Compiler.SqlExpressionCompiler.IsPropertyExpressionRootParameter(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <summary>
+            This checks if the specified Expression is (in the end) an operation of a Parameter of the Root Expression.
+            </summary>
+            <param name="rootExpression"></param>
+            <param name="e"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.Compiler.SqlExpressionCompiler.TraverseToLastExpression(System.Linq.Expressions.Expression)">
+            <summary>
+            Gets the next sub-Expression from the specified Expression recursively until the last one is retrieved.
+            </summary>
+            <param name="e"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SQLinq.Dynamic.DynamicSQLinq">
+            <summary>
+            Allows for dynamic ad-hoc SQL code generation with a similar API to LINQ while also allowing for LINQ expressions to be used via Lambda expressions.
+            </summary>
+        </member>
+        <member name="P:SQLinq.Dynamic.DynamicSQLinq.TableName">
+            <summary>
+            The database table/view name to use for the generated query.
+            </summary>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.Distinct(System.Boolean)">
+            <summary>
+            Allows for SQL 'SELECT DISTINCT' to be performed.
+            </summary>
+            <param name="distinct">Boolean value indicating whether 'DISTINCT' rows should be returned from the generated SQL. Default is True</param>
+            <returns>The DynamicSQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.Select(System.String[])">
+            <summary>
+            Allows for SQL 'SELECT' fields to be specified.
+            </summary>
+            <param name="fields">The table/view fields to select.</param>
+            <returns>The DynamicSQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.SelectTable(System.String,System.String[])">
+            <summary>
+            Allows for SQL 'SELECT' fields to be specified from the specified Table/View
+            </summary>
+            <param name="tableName">The table/view name to select fields from.</param>
+            <param name="fields">The fields to select.</param>
+            <returns>The DynamicSQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.GroupBy(System.String[])">
+            <summary>
+            Allows for SQL 'GROUP BY' fields to be specified.
+            </summary>
+            <param name="fields">The table/view fields to 'GROUP BY'</param>
+            <returns>The DynamicSQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.Take(System.Int32)">
+            <summary>
+            Specifies the number of results to return from the generated query.
+            </summary>
+            <param name="takeCount"></param>
+            <returns>The DynamicSQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.Skip(System.Int32)">
+            <summary>
+            Specifies the number of matching result from the the generated query to skip before return results.
+            </summary>
+            <param name="skipCount"></param>
+            <returns>The DynamicSQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.Count">
+            <summary>
+            
+            </summary>
+            <returns>A SQLinqCount instance that can be used for generating a Count query.</returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.Where(SQLinq.Dynamic.DynamicSQLinqExpressionCollection)">
+            <summary>
+            Specifies a SQL 'WHERE' clause to use with the generated query using a collection of LINQ expressions.
+            </summary>
+            <param name="expressionCollection"></param>
+            <returns>The DynamicSQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.Where(System.String,System.Object[])">
+            <summary>
+            Specifies a SQL 'WHERE' clause to use with the generated query.
+            </summary>
+            <param name="clause">The SQL code to use.</param>
+            <param name="parameters">The parameters to use for the specified 'WHERE' clause.</param>
+            <returns>The DynamicSQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.Where``1(System.String,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Specifies a SQL 'WHERE' clause to use with the generated query using a LINQ expression.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="fieldName">The Table/View Column name</param>
+            <param name="expression">The LINQ / Lambda expression to use</param>
+            <returns>The DynamicSQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.Having(System.String,System.Object[])">
+            <summary>
+            Specifies a SQL 'HAVING' clause to use with the generated query.
+            </summary>
+            <param name="clause">The SQL code to use.</param>
+            <param name="parameters">The parameters to use for the specified 'HAVING' clause.</param>
+            <returns>The DynamicSQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.Having``1(System.String,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Specifies a SQL 'HAVING' clause to use with the generated query using a LINQ expression.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="fieldName">The Table/View Column name</param>
+            <param name="expression">The LINQ / Lambda expression to use</param>
+            <returns>The DynamicSQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.Join(System.String,System.String,System.Object[])">
+            <summary>
+            Specifies a SQL 'JOIN' to use with the generated query.
+            </summary>
+            <param name="tableName"></param>
+            <param name="clause"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.Join(System.String,SQLinq.Dynamic.DynamicSQLinqJoinOperator,System.String,System.Object[])">
+            <summary>
+            Specifies a SQL join to use with the generated query.
+            </summary>
+            <param name="tableName"></param>
+            <param name="clause"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.LeftJoin(System.String,System.String,System.Object[])">
+            <summary>
+            Specifies a SQL 'LEFT JOIN' to use with the generated query.
+            </summary>
+            <param name="tableName"></param>
+            <param name="clause"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.RightJoin(System.String,System.String,System.Object[])">
+            <summary>
+            Specifies a SQL 'RIGHT JOIN' to use with the generated query.
+            </summary>
+            <param name="tableName"></param>
+            <param name="clause"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.FullJoin(System.String,System.String,System.Object[])">
+            <summary>
+            Specifies a SQL 'FULL JOIN' to use with the generated query.
+            </summary>
+            <param name="tableName"></param>
+            <param name="clause"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.OrderBy(System.String[])">
+            <summary>
+            Specifies columns to sort the query result.
+            </summary>
+            <param name="fieldNames"></param>
+            <returns>The DynamicSQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.OrderByDescending(System.String[])">
+            <summary>
+            Specifies columns to sort the query result in Descending order.
+            </summary>
+            <param name="fieldNames"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinq.ToSQL(System.Int32,System.String)">
+            <summary>
+            Generated SQL code and query parameters from the specified query details.
+            </summary>
+            <param name="existingParameterCount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinqCount.#ctor(SQLinq.Dynamic.DynamicSQLinq)">
+            <summary>
+            
+            </summary>
+            <param name="query">The DynamicSQLinq instance to use as the root for the Count query. This is passed by reference.</param>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinqJoinExpression.#ctor(System.String,System.String,System.Object[])">
+            <summary>
+            Creates a new DynamicSQLinqJoinExpression instance with the JoinOperator set to DynamicSQLinqJoinOperator.Inner ("INNER JOIN")
+            </summary>
+            <param name="tableName">The database Table / View to Join</param>
+            <param name="clause">The Join clause</param>
+            <param name="parameters">Any parameters necessary for the Join clause</param>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinqJoinExpression.#ctor(SQLinq.ISqlDialect,System.String,System.String,System.Object[])">
+            <summary>
+            Creates a new DynamicSQLinqJoinExpression instance with the JoinOperator set to DynamicSQLinqJoinOperator.Inner ("INNER JOIN")
+            </summary>
+            <param name="tableName">The database Table / View to Join</param>
+            <param name="clause">The Join clause</param>
+            <param name="parameters">Any parameters necessary for the Join clause</param>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinqJoinExpression.#ctor(SQLinq.ISqlDialect,System.String,SQLinq.Dynamic.DynamicSQLinqJoinOperator,System.String,System.Object[])">
+            <summary>
+            Creates a new DynamicSQLinqJoinExpression instance
+            </summary>
+            <param name="tableName">The database Table / View to Join</param>
+            <param name="joinOperator">The JOIN operator</param>
+            <param name="clause">The Join clause</param>
+            <param name="parameters">Any parameter values necessary for the Join clause</param>
+        </member>
+        <member name="P:SQLinq.Dynamic.DynamicSQLinqJoinExpression.Table">
+            <summary>
+            The database Table / View to Join
+            </summary>
+        </member>
+        <member name="P:SQLinq.Dynamic.DynamicSQLinqJoinExpression.JoinOperator">
+            <summary>
+            The JOIN operator
+            </summary>
+        </member>
+        <member name="P:SQLinq.Dynamic.DynamicSQLinqJoinExpression.Clause">
+            <summary>
+            The Join clause
+            </summary>
+        </member>
+        <member name="P:SQLinq.Dynamic.DynamicSQLinqJoinExpression.Parameters">
+            <summary>
+            All necessary Join parameter values
+            </summary>
+        </member>
+        <member name="F:SQLinq.Dynamic.DynamicSQLinqJoinOperator.Inner">
+            <summary>
+            'JOIN' or 'INNER JOIN': Returns rows when there is at least one match in both tables.
+            </summary>
+        </member>
+        <member name="F:SQLinq.Dynamic.DynamicSQLinqJoinOperator.Left">
+            <summary>
+            'LEFT JOIN' or 'LEFT OUTER JOIN': Returns all rows from the left table, even if there are no matches in the right table.
+            </summary>
+        </member>
+        <member name="F:SQLinq.Dynamic.DynamicSQLinqJoinOperator.Right">
+            <summary>
+            'RIGHT JOIN' or 'RIGHT OUTER JOIN': Returns all rows from the right table, even if there are no matches in the left table.
+            </summary>
+        </member>
+        <member name="F:SQLinq.Dynamic.DynamicSQLinqJoinOperator.Full">
+            <summary>
+            'FULL JOIN' or 'FULL OUTER JOIN': Returns rows when there is a match in one of the tables.
+            </summary>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinqSubQueryJoinExpression.#ctor(SQLinq.ISQLinq,System.String,System.String,System.Object[])">
+            <summary>
+            Creates a new DynamicSQLinqSubQueryJoinExpression instance with the JoinOperator set to DynamicSQLinqJoinOperator.Inner ("INNER JOIN")
+            </summary>
+            <param name="query">The sub-query that will be joined</param>
+            <param name="alias">The Alias to give the sub-query within the main query</param>
+            <param name="clause">The Join clause</param>
+            <param name="parameters">Any parameters necessary for the Join clause</param>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinqSubQueryJoinExpression.#ctor(SQLinq.ISqlDialect,SQLinq.ISQLinq,System.String,System.String,System.Object[])">
+            <summary>
+            Creates a new DynamicSQLinqSubQueryJoinExpression instance with the JoinOperator set to DynamicSQLinqJoinOperator.Inner ("INNER JOIN")
+            </summary>
+            <param name="query">The sub-query that will be joined</param>
+            <param name="alias">The Alias to give the sub-query within the main query</param>
+            <param name="clause">The Join clause</param>
+            <param name="parameters">Any parameters necessary for the Join clause</param>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinqSubQueryJoinExpression.#ctor(SQLinq.ISqlDialect,SQLinq.ISQLinq,System.String,SQLinq.Dynamic.DynamicSQLinqJoinOperator,System.String,System.Object[])">
+            <summary>
+            Creates a new DynamicSQLinqSubQueryJoinExpression instance
+            </summary>
+            <param name="query">The sub-query that will be joined</param>
+            <param name="alias">The Alias to give the sub-query within the main query</param>
+            <param name="joinOperator">The JOIN operator</param>
+            <param name="clause">The Join clause</param>
+            <param name="parameters">Any parameters necessary for the Join clause</param>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinqUpdate.Where(SQLinq.Dynamic.DynamicSQLinqExpressionCollection)">
+            <summary>
+            Specifies a SQL 'WHERE' clause to use with the generated query using a collection of LINQ expressions.
+            </summary>
+            <param name="expressionCollection"></param>
+            <returns>The DynamicSQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinqUpdate.Where(System.String,System.Object[])">
+            <summary>
+            Specifies a SQL 'WHERE' clause to use with the generated query.
+            </summary>
+            <param name="clause">The SQL code to use.</param>
+            <param name="parameters">The parameters to use for the specified 'WHERE' clause.</param>
+            <returns>The DynamicSQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.Dynamic.DynamicSQLinqUpdate.Where``1(System.String,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Specifies a SQL 'WHERE' clause to use with the generated query using a LINQ expression.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="fieldName">The Table/View Column name</param>
+            <param name="expression">The LINQ / Lambda expression to use</param>
+            <returns>The DynamicSQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.ISQLinq.ToSQL(System.Int32,System.String)">
+            <summary>
+            Generates a SQLinqResult object from the query details specified for the ISQLinq object.
+            </summary>
+            <param name="existingParameterCount">Optional. The number of SQLinq generated parameters that have already been generated using a different ISQLinq instance that will be joined with this method calls results into a single query.</param>
+            <returns></returns>
+        </member>
+        <member name="P:SQLinq.ISQLinqIf.If">
+            <summary>
+            The "IF" clause to evaluate
+            </summary>
+        </member>
+        <member name="P:SQLinq.ISQLinqIf.Then">
+            <summary>
+            Specifies the query to execute when the "IF" clause evaluates to TRUE
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="P:SQLinq.ISQLinqIf.Else">
+            <summary>
+            Specifies the query to execute when the "IF" clause evaluates to FALSE
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.ISQLinqJoinExpression.ToSQL(System.Int32,System.String)">
+            <summary>
+            Generates a DynamicSQLinqJoinResult object from the query join details specified for the IDynamicSQLinqJoinExpression object.
+            </summary>
+            <param name="existingParameterCount">Optional. The number of ISQLinq generated parameters that have already been generated using an ISQLinq instance that will be joined with this method calls results into a single query.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.ObjectExtensions.ToSQLinq``1(``0,System.String,SQLinq.ISqlDialect)">
+            <summary>
+            Creates an instance of SQLinq that is based off the specified Object Type.
+            </summary>
+            <typeparam name="T">The Type to use for creating the SQLinq instance.</typeparam>
+            <param name="obj">The Object Type to base the SQLinq instance off of.</param>
+            <param name="tableName">Optional. The database table name to use for generated SQL code. If specified, this will override the Objects name and/or SQLinqTable attribute usage.</param>
+            <returns>A SQLinq instance.</returns>
+        </member>
+        <member name="M:SQLinq.SQLinq.Create``1(``0,System.String,SQLinq.ISqlDialect)">
+            <summary>
+            Creates a new SQLinq object for the Type of the object specified.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj">The object that defines the Type to use for creating the SQLinq object instance for.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.SQLinq.Create``1(``0,System.String)">
+            <summary>
+            Creates a new SQLinq object for the Type of the object specified.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj">The object that defines the Type to use for creating the SQLinq object instance for.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.SQLinq.Create(System.String,SQLinq.ISqlDialect)">
+            <summary>
+            Creates a new DynamicSQLinq object for the specified table name.
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.SQLinq.Create(System.String)">
+            <summary>
+            Creates a new DynamicSQLinq object for the specified table name.
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.SQLinq.Insert``1(``0,SQLinq.ISqlDialect)">
+            <summary>
+            Creates a new SQLinqInsert object for the specified Object.
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.SQLinq.Insert``1(``0)">
+            <summary>
+            Creates a new SQLinqInsert object for the specified Object.
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.SQLinq.Insert``1(``0,System.String,SQLinq.ISqlDialect)">
+            <summary>
+            Creates a new SQLinqInsert object for the specified Object and table name.
+            </summary>
+            <param name="data"></param>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.SQLinq.Insert``1(``0,System.String)">
+            <summary>
+            Creates a new SQLinqInsert object for the specified Object and table name.
+            </summary>
+            <param name="data"></param>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.SQLinq.Update``1(``0,SQLinq.ISqlDialect)">
+            <summary>
+            Creates a new SQLinqInsert object for the specified Object.
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.SQLinq.Update``1(``0)">
+            <summary>
+            Creates a new SQLinqInsert object for the specified Object.
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.SQLinq.Update``1(``0,System.String,SQLinq.ISqlDialect)">
+            <summary>
+            Creates a new SQLinqInsert object for the specified Object and table name.
+            </summary>
+            <param name="data"></param>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SQLinq.SQLinq.Update``1(``0,System.String)">
+            <summary>
+            Creates a new SQLinqInsert object for the specified Object and table name.
+            </summary>
+            <param name="data"></param>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SQLinq.SQLinq`1">
+            <summary>
+            Allows for Ad-Hoc SQL queries to be generated using LINQ in a stongly type manner, while also taking advantage of compile time validation.
+            </summary>
+            <typeparam name="T">The Type that contains a strongly typed reference of the scheme for the database table/view to be queried.</typeparam>
+        </member>
+        <member name="M:SQLinq.SQLinq`1.#ctor">
+            <summary>
+            Creates a new SQLinq object
+            </summary>
+        </member>
+        <member name="M:SQLinq.SQLinq`1.#ctor(SQLinq.ISqlDialect)">
+            <summary>
+            Creates a new SQLinq object
+            </summary>
+        </member>
+        <member name="M:SQLinq.SQLinq`1.#ctor(System.String)">
+            <summary>
+            Creates a new SQLinq object
+            </summary>
+            <param name="tableNameOverride">The database table name to use. This explicitly overrides any use of the SQLinqTable attribute.</param>
+        </member>
+        <member name="M:SQLinq.SQLinq`1.#ctor(System.String,SQLinq.ISqlDialect)">
+            <summary>
+            Creates a new SQLinq object
+            </summary>
+            <param name="tableNameOverride">The database table name to use. This explicitly overrides any use of the SQLinqTable attribute.</param>
+        </member>
+        <member name="M:SQLinq.SQLinq`1.Distinct(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="distinct">Boolean value indicating whether 'DISTINCT' rows should be returned from the generated SQL. Default is True</param>
+            <returns>The SQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.SQLinq`1.Take(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="take"></param>
+            <returns>The SQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.SQLinq`1.Skip(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="skip"></param>
+            <returns>The SQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.SQLinq`1.Count">
+            <summary>
+            
+            </summary>
+            <returns>A SQLinqCount instance that can be used for generating a Count query.</returns>
+        </member>
+        <member name="M:SQLinq.SQLinq`1.Where(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+            <returns>The SQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.SQLinq`1.Where(System.Linq.Expressions.Expression)">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+            <returns>The SQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.SQLinq`1.Select(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            
+            </summary>
+            <param name="selector"></param>
+            <returns>The SQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.SQLinq`1.OrderBy(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            
+            </summary>
+            <param name="keySelector"></param>
+            <returns>The SQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.SQLinq`1.OrderByDescending(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            
+            </summary>
+            <param name="keySelector"></param>
+            <returns>The SQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.SQLinq`1.ThenBy(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            
+            </summary>
+            <param name="keySelector"></param>
+            <returns>The SQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.SQLinq`1.ThenByDescending(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            
+            </summary>
+            <param name="keySelector"></param>
+            <returns>The SQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.SQLinq`1.ToSQL(System.Int32,System.String)">
+            <summary>
+            Returns a SQLinqResult that contains the information for the query.
+            </summary>
+            <param name="existingParameterCount">Used to set the unique id's of the query parameters. The first query parameter will be 'existingParameterCount' plus one.</param>
+            <returns></returns>
+        </member>
+        <member name="T:SQLinq.SQLinqColumnAttribute">
+            <summary>
+            Used to explicitly specify the database column name if it doesn't match the object property name.
+            </summary>
+        </member>
+        <member name="M:SQLinq.SQLinqColumnAttribute.#ctor(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            SQLinqColumnAttribute constructor
+            </summary>
+            <param name="columnName">The database column name to use for this property with SQLinq queries.</param>
+        </member>
+        <member name="P:SQLinq.SQLinqColumnAttribute.Column">
+            <summary>
+            The database column name to use for this property with SQLinq queries.
+            </summary>
+        </member>
+        <member name="P:SQLinq.SQLinqColumnAttribute.Insert">
+            <summary>
+            Determines whether the column is used for inserting; via ISQLinqInsert.
+            </summary>
+        </member>
+        <member name="P:SQLinq.SQLinqColumnAttribute.Update">
+            <summary>
+            Determines whether the column is used for updating; via ISQLinqUpdate.
+            </summary>
+        </member>
+        <member name="M:SQLinq.SQLinqCount`1.#ctor(SQLinq.SQLinq{`0})">
+            <summary>
+            
+            </summary>
+            <param name="query">The DynamicSQLinq instance to use as the root for the Count query. This is passed by reference.</param>
+        </member>
+        <member name="M:SQLinq.SQLinqIf.#ctor(SQLinq.SQLinqIfOperator,SQLinq.ISQLinq)">
+            <summary>
+            Createa a new SQLinqIf object
+            </summary>
+            <param name="operator">The operator used for evaluating the IF clause</param>
+            <param name="ifClause"></param>
+        </member>
+        <member name="M:SQLinq.SQLinqIf.#ctor(System.String)">
+            <summary>
+            Createa a new SQLinqIf object
+            </summary>
+            <param name="clause">The SQL code to use for the IF clause</param>
+        </member>
+        <member name="M:SQLinq.SQLinqIf.#ctor(SQLinq.SQLinqIfOperator,System.String)">
+            <summary>
+            Createa a new SQLinqIf object
+            </summary>
+            <param name="operator">The operator used for evaluating the IF clause</param>
+            <param name="ifClause"></param>
+        </member>
+        <member name="P:SQLinq.SQLinqIf.If">
+            <summary>
+            The clause used to evaluate the IF condition
+            </summary>
+        </member>
+        <member name="P:SQLinq.SQLinqIf.Operator">
+            <summary>
+            The operator to use for the evaluation of the IF clause
+            </summary>
+        </member>
+        <member name="P:SQLinq.SQLinqIf.Then">
+            <summary>
+            Specifies the query to execute when the "IF" clause evaluates to TRUE
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="P:SQLinq.SQLinqIf.Else">
+            <summary>
+            Specifies the query to execute when the "IF" clause evaluates to FALSE
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="F:SQLinq.SQLinqIfOperator.None">
+            <summary>
+            Does not alter the evaluation of the IF clause
+            </summary>
+        </member>
+        <member name="F:SQLinq.SQLinqIfOperator.Exists">
+            <summary>
+            Specifies that the IF clause tests for the existence of rows
+            </summary>
+        </member>
+        <member name="F:SQLinq.SQLinqIfOperator.Not">
+            <summary>
+            Reverses the boolean evaluation of the IF clause
+            </summary>
+        </member>
+        <member name="M:SQLinq.SQLinqSelectResult.ToQuery">
+            <summary>
+            Returns the Full SQL statement for the specified query
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SQLinq.SQLinqSubQueryAttribute">
+            <summary>
+            Allows for SQL sub-queries to be specified using SQLinq.
+            </summary>
+        </member>
+        <member name="P:SQLinq.SQLinqSubQueryAttribute.SQL">
+            <summary>
+            The SQL code to use for the sub-query.
+            </summary>
+        </member>
+        <member name="P:SQLinq.SQLinqSubQueryAttribute.Type">
+            <summary>
+            The Type that contains the static Method to call for generating the sub-query.
+            </summary>
+        </member>
+        <member name="P:SQLinq.SQLinqSubQueryAttribute.Method">
+            <summary>
+            The static Method of the Type that contains the method to call for generating the sub-query.
+            </summary>
+        </member>
+        <member name="T:SQLinq.SQLinqTableAttribute">
+            <summary>
+            Used to explicitly specify the database table or view name if it doesn't match the object name.
+            </summary>
+        </member>
+        <member name="M:SQLinq.SQLinqTableAttribute.#ctor(System.String)">
+            <summary>
+            SQLinqTableAttribute constructor
+            </summary>
+            <param name="tableName">The database table/view name to use for this object with SQLinq queries.</param>
+        </member>
+        <member name="P:SQLinq.SQLinqTableAttribute.Table">
+            <summary>
+            The database table/view name to use for this object with SQLinq queries.
+            </summary>
+        </member>
+        <member name="M:SQLinq.SQLinqUpdate`1.Where(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+            <returns>The SQLinq instance to allow for method chaining.</returns>
+        </member>
+        <member name="M:SQLinq.SQLinqUpdate`1.Where(System.Linq.Expressions.Expression)">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+            <returns>The SQLinq instance to allow for method chaining.</returns>
+        </member>
+    </members>
+</doc>

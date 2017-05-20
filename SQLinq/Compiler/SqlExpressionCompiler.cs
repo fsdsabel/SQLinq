@@ -645,6 +645,21 @@ namespace SQLinq.Compiler
                     var t = (Type)ce.Type;
                     var fieldName = de.Member.Name;
 
+#if NET46
+                    var fieldInfo = t.GetField(fieldName) ?? t.GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic);
+                    if (fieldInfo != null)
+                    {
+                        val = fieldInfo.GetValue(val);
+                    }
+                    else
+                    {
+                        PropertyInfo propInfo = t.GetProperty(fieldName) ?? t.GetProperty(fieldName, BindingFlags.Instance | BindingFlags.NonPublic);
+                        if (propInfo != null)
+                        {
+                            val = propInfo.GetValue(val, null);
+                        }
+                    }
+#else
                     var fieldInfo = TypeExtensions.GetField(t, fieldName) ?? TypeExtensions.GetField(t, fieldName, BindingFlags.Instance | BindingFlags.NonPublic);
                     if (fieldInfo != null)
                     {
@@ -658,7 +673,7 @@ namespace SQLinq.Compiler
                             val = propInfo.GetValue(val, null);
                         }
                     }
-
+#endif
                     //var mt = (System.Reflection.MemberTypes)(de.Member).MemberType;
                     //if (mt == System.Reflection.MemberTypes.Field)
                     //{
@@ -747,6 +762,6 @@ namespace SQLinq.Compiler
             throw new NotSupportedException("SQExpressionCompiler.GetMemberAccessValue: Expression Not Supported");
         }
 
-        #endregion
+#endregion
     }
 }

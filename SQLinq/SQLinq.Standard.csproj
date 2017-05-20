@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFrameworks>net46;netstandard1.3</TargetFrameworks>
     <Company>Chris Pietschmann (http://pietschsoft.com)</Company>
-    <Version>3.1.1</Version>
+    <Version>3.1.2</Version>
     <Copyright>Copyright © Chris Pietschmann 2015</Copyright>
     <Authors>Chris Pietschmann</Authors>
     <Product>SQLinq</Product>
@@ -17,17 +17,22 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard1.3\SQLinq.xml</DocumentationFile>
+    <DocumentationFile>SQLinq.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.3'">
     <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net46'">
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
 </Project>

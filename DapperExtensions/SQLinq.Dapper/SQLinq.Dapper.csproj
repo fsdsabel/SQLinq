@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFrameworks>net46;netstandard1.3</TargetFrameworks>
     <Company>Chris Pietschmann (http://pietschsoft.com)</Company>
-    <Version>3.1.1</Version>
+    <Version>3.1.2</Version>
     <Copyright>Copyright © Chris Pietschmann 2015</Copyright>
     <Authors>Chris Pietschmann</Authors>
     <Product>SQLinq.Dapper</Product>
@@ -16,8 +16,8 @@
     <DelaySign>False</DelaySign>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard1.3\.xml</DocumentationFile>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DocumentationFile>SQLinq.Dapper.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
